@@ -1,15 +1,15 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "https://my-json-server.typicode.com/sajadcheraghali/store-react"
+  baseURL: "https://raw.githubusercontent.com/sajadcheraghali/store-react/main"
 });
 
 export async function getProducts() {
-    const { data } = await client("/products");
-    return data;
+  const { data } = await client.get("/db.json");
+  return data.products; 
 }
 
-export async function getProduct(id: string | number ) {
-    const { data } = await client(`/products/${id}`);
-    return data;
+export async function getProduct(id: string | number) {
+  const { data } = await client.get("/db.json");
+  return data.products.find((p: any) => p.id === String(id));
 }
